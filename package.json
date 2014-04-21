@@ -1,0 +1,19 @@
+{
+  "name": "mongodb-ns",
+  "version": "0.0.1",
+  "author": "Lucas Hrabovsky <hrabovsky.lucas@gmail.com> (http://imlucas.com)",
+  "description": "Hoisted `namespace_string` logic from mongo kernel source.",
+  "scripts": {
+    "test": "mocha"
+  },
+  "homepage": "http://github.com/imlucas/mongodb-ns",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/imlucas/mongodb-ns.git"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^1.17.1"
+  }
+}
