@@ -30,10 +30,15 @@ function NS(ns){
   this.system = /^system\./.test(this.collection);
   this.oplog = /local\.oplog\.(\$main|rs)/.test(ns);
 
+
   this.command = this.collection === '$cmd' ||
     this.collection.indexOf('$cmd.sys') === 0;
   this.special = this.oplog || this.command || this.system;
-  this.normal = this.oplog || this.ns.indexOf('$') === -1 ;
+
+  this.specialish = this.special || ['local', 'admin'].indexOf(this.database) > -1;
+
+  this.normal = this.oplog || this.ns.indexOf('$') === -1;
+
 
   this.validDatabaseName = new RegExp('^[^\\\\\/\'".*<>:|? ]*$').test(this.database) &&
     this.database.length <= NS.MAX_DATABASE_NAME_LENGTH;
@@ -61,6 +66,8 @@ NS.prototype.special = false;
 NS.prototype.system = false;
 NS.prototype.oplog = false;
 NS.prototype.normal = false;
+NS.prototype.specialish = false;
+
 
 for(var i=0; i< types.length; i++){
   NS.prototype['is' + types[i]] = function(){
@@ -75,3 +82,13 @@ NS.prototype.toString = function(){
 NS.MAX_DATABASE_NAME_LENGTH = 128;
 
 module.exports = NS;
+
+module.exports.sort = function(namespaces){
+  namespaces.sort(function(a, b){
+    if(NS(a).specialish && NS(b).specialish) return 0;
+    if(NS(a).specialish && !NS(b).specialish) return 1;
+    if(!NS(a).specialish && NS(b).specialish) return -1;
+    return a > b ? 1 : -1;
+  });
+  return namespaces;
+};

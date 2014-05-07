@@ -201,4 +201,13 @@ describe('ns', function(){
       assert.equal(ns('canadian-things.foods.read.count').metricType, 'count');
     });
   });
+
+  describe('sorting', function(){
+    it('should sort them', function(){
+      var names = ['admin', 'canadian-things', 'github', 'local', 'scope_stat', 'statsd', 'test'];
+      var expect = ['canadian-things', 'github', 'scope_stat', 'statsd', 'test', 'admin',  'local'];
+      ns.sort(names);
+      assert.deepEqual(names, expect);
+    });
+  });
 });
