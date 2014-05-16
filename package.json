@@ -11,6 +11,10 @@
     "type": "git",
     "url": "git://github.com/imlucas/mongodb-ns.git"
   },
+  "keywords": [
+    "mongodb",
+    "mongodb.js"
+  ],
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
