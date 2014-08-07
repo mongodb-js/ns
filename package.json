@@ -1,6 +1,6 @@
 {
   "name": "mongodb-ns",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "author": "Lucas Hrabovsky <hrabovsky.lucas@gmail.com> (http://imlucas.com)",
   "description": "Hoisted `namespace_string` logic from mongo kernel source.",
   "scripts": {
@@ -18,6 +18,6 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "mocha": "^1.17.1"
+    "mocha": "^1.21.4"
   }
 }
