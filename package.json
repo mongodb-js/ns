@@ -2,14 +2,14 @@
   "name": "mongodb-ns",
   "version": "1.0.0",
   "author": "Lucas Hrabovsky <hrabovsky.lucas@gmail.com> (http://imlucas.com)",
-  "description": "Hoisted `namespace_string` logic from mongo kernel source.",
+  "description": "MongoDB namespace parsing and validation",
   "scripts": {
     "test": "mocha"
   },
-  "homepage": "http://github.com/imlucas/mongodb-ns",
+  "homepage": "http://github.com/mongodb-js/ns",
   "repository": {
     "type": "git",
-    "url": "git://github.com/imlucas/mongodb-ns.git"
+    "url": "git://github.com/mongodb-js/ns.git"
   },
   "keywords": [
     "mongodb",
