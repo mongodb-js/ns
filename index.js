@@ -6,27 +6,29 @@ var types = [
   'Normal'
 ];
 
-function NS(ns){
-  if(!(this instanceof NS)) return new NS(ns);
+function NS(ns) {
+  if (!(this instanceof NS)) {
+    return new NS(ns);
+  }
 
   this.ns = ns;
   this.dotIndex = ns.indexOf('.');
-  if(this.dotIndex === -1){
+  if (this.dotIndex === -1) {
     this.database = ns;
     this.collection = '';
-  }
-  else{
+  } else {
     this.database = ns.slice(0, this.dotIndex);
     this.collection = ns.slice(this.dotIndex + 1);
   }
 
-  if(/\.(count|time)$/.test(this.collection)){
+  if (/\.(count|time)$/.test(this.collection)) {
     var matches = /\.([a-z]+)\.(count|time)$/.exec(this.collection);
     this.collection = this.collection.slice(0, matches.index);
     this.metric = matches[1];
     this.metricType = matches[2];
   }
 
+  this.system = /^system\./.test(this.collection);
   this.system = /^system\./.test(this.collection);
   this.oplog = /local\.oplog\.(\$main|rs)/.test(ns);
 
@@ -46,8 +48,10 @@ function NS(ns){
     (this.oplog || /^[^\0\$]*$/.test(this.collection));
 
   this.databaseHash = 7;
-  this.ns.split('').every(function(c, i){
-    if(c === '.') return false;
+  this.ns.split('').every(function(c, i) {
+    if (c === '.') {
+      return false;
+    }
     this.databaseHash += 11 * this.ns.charCodeAt(i);
     this.databaseHash *= 3;
     return true;
@@ -69,13 +73,13 @@ NS.prototype.normal = false;
 NS.prototype.specialish = false;
 
 
-for(var i=0; i< types.length; i++){
-  NS.prototype['is' + types[i]] = function(){
-    return this[types[i].toLowerCase()];
+types.forEach(function(type) {
+  NS.prototype['is' + type] = function() {
+    return this[type.toLowerCase()];
   };
-}
+});
 
-NS.prototype.toString = function(){
+NS.prototype.toString = function() {
   return this.ns;
 };
 
@@ -83,11 +87,18 @@ NS.MAX_DATABASE_NAME_LENGTH = 128;
 
 module.exports = NS;
 
-module.exports.sort = function(namespaces){
-  namespaces.sort(function(a, b){
-    if(NS(a).specialish && NS(b).specialish) return 0;
-    if(NS(a).specialish && !NS(b).specialish) return 1;
-    if(!NS(a).specialish && NS(b).specialish) return -1;
+var ns = NS;
+module.exports.sort = function(namespaces) {
+  namespaces.sort(function(a, b) {
+    if (ns(a).specialish && ns(b).specialish) {
+      return 0;
+    }
+    if (ns(a).specialish && !ns(b).specialish) {
+      return 1;
+    }
+    if (!ns(a).specialish && ns(b).specialish) {
+      return -1;
+    }
     return a > b ? 1 : -1;
   });
   return namespaces;
