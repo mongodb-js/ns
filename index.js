@@ -3,7 +3,8 @@ var types = [
   'Special',
   'System',
   'Oplog',
-  'Normal'
+  'Normal',
+  'Conf'
 ];
 
 function NS(ns) {
@@ -29,13 +30,12 @@ function NS(ns) {
   }
 
   this.system = /^system\./.test(this.collection);
-  this.system = /^system\./.test(this.collection);
   this.oplog = /local\.oplog\.(\$main|rs)/.test(ns);
 
 
   this.command = this.collection === '$cmd' ||
     this.collection.indexOf('$cmd.sys') === 0;
-  this.special = this.oplog || this.command || this.system;
+  this.special = this.oplog || this.command || this.system || this.database === 'config';
 
   this.specialish = this.special || ['local', 'admin'].indexOf(this.database) > -1;
 
