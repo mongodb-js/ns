@@ -45,7 +45,7 @@ function NS(ns) {
    * @note (imlucas) The following are not valid on windows:
    * `*<>:|?`
    */
-  this.validDatabaseName = new RegExp('^[^\\\\\/\'". ]*$').test(this.database) &&
+  this.validDatabaseName = new RegExp('^[^\\\\\/". ]*$').test(this.database) &&
     this.database.length <= NS.MAX_DATABASE_NAME_LENGTH;
   this.validCollectionName = this.collection.length > 0 &&
     (this.oplog || /^[^\0\$]*$/.test(this.collection));
