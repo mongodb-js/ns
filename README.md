@@ -1,6 +1,6 @@
 # mongodb-ns
 
-[![build status](https://secure.travis-ci.org/imlucas/mongodb-ns.png)](http://travis-ci.org/imlucas/mongodb-ns)
+[![build status](https://secure.travis-ci.org/mongodb-js/ns.png)](http://travis-ci.org/mongodb-js/ns)
 
 Handle dem namespaces like the kernel do.
 
