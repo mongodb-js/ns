@@ -22,8 +22,8 @@ function NS(ns) {
     this.collection = ns.slice(this.dotIndex + 1);
   }
 
-  if (/\.(count|time)$/.test(this.collection)) {
-    var matches = /\.([a-z]+)\.(count|time)$/.exec(this.collection);
+  var matches = /\.([a-z]+)\.(count|time)$/.exec(this.collection);
+  if (matches) {
     this.collection = this.collection.slice(0, matches.index);
     this.metric = matches[1];
     this.metricType = matches[2];

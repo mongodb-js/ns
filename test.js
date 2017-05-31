@@ -200,6 +200,22 @@ describe('ns', function() {
       assert.equal(ns('canadian-things.foods.read.count').metric, 'read');
       assert.equal(ns('canadian-things.foods.read.count').metricType, 'count');
     });
+
+    context('triggered a TypeError', function() {
+      // TypeError: Cannot read property 'index' of null
+      it('uppercase', function() {
+        assert.equal(ns('FOO.BAR.count').metric, null);
+        assert.equal(ns('FOO.BAR.count').metricType, null);
+      });
+      it('pure numbers or dates', function() {
+        assert.equal(ns('2017-01-01.12-34-56.count').metric, null);
+        assert.equal(ns('2017-01-01.12-34-56.count').metricType, null);
+      });
+      it('special characters like ü', function() {
+        assert.equal(ns('ü.ü.count').metric, null);
+        assert.equal(ns('ü.ü.count').metricType, null);
+      });
+    });
   });
 
   describe('sorting', function() {
