@@ -190,30 +190,30 @@ describe('ns', function() {
 
   describe('metric', function() {
     it('should default to null if not a metric namespace', function() {
-      assert.equal(ns('canadian-things.foods').metric, null);
+      assert.equal(ns('canadian-things.foods').metric, undefined);
     });
     it('should allow only `count` and `time` types', function() {
-      assert.equal(ns('canadian-things.foods.read.microseconds').metric, null);
+      assert.equal(ns('canadian-things.foods.read.microseconds').metric, undefined);
     });
 
-    it('should pluck the name and type of a valid metric', function() {
-      assert.equal(ns('canadian-things.foods.read.count').metric, 'read');
-      assert.equal(ns('canadian-things.foods.read.count').metricType, 'count');
+    it('should no longer pluck the name and type of a valid metric', function() {
+      assert.equal(ns('canadian-things.foods.read.count').metric, undefined);
+      assert.equal(ns('canadian-things.foods.read.count').metricType, undefined);
     });
 
     context('triggered a TypeError', function() {
       // TypeError: Cannot read property 'index' of null
       it('uppercase', function() {
-        assert.equal(ns('FOO.BAR.count').metric, null);
-        assert.equal(ns('FOO.BAR.count').metricType, null);
+        assert.equal(ns('FOO.BAR.count').metric, undefined);
+        assert.equal(ns('FOO.BAR.count').metricType, undefined);
       });
       it('pure numbers or dates', function() {
-        assert.equal(ns('2017-01-01.12-34-56.count').metric, null);
-        assert.equal(ns('2017-01-01.12-34-56.count').metricType, null);
+        assert.equal(ns('2017-01-01.12-34-56.count').metric, undefined);
+        assert.equal(ns('2017-01-01.12-34-56.count').metricType, undefined);
       });
       it('special characters like ü', function() {
-        assert.equal(ns('ü.ü.count').metric, null);
-        assert.equal(ns('ü.ü.count').metricType, null);
+        assert.equal(ns('ü.ü.count').metric, undefined);
+        assert.equal(ns('ü.ü.count').metricType, undefined);
       });
     });
   });

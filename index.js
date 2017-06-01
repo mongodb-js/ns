@@ -22,13 +22,6 @@ function NS(ns) {
     this.collection = ns.slice(this.dotIndex + 1);
   }
 
-  var matches = /\.([a-z]+)\.(count|time)$/.exec(this.collection);
-  if (matches) {
-    this.collection = this.collection.slice(0, matches.index);
-    this.metric = matches[1];
-    this.metricType = matches[2];
-  }
-
   this.system = /^system\./.test(this.collection);
   this.oplog = /local\.oplog\.(\$main|rs)/.test(ns);
 
@@ -60,9 +53,6 @@ function NS(ns) {
     return true;
   }.bind(this));
 }
-
-NS.prototype.metric = null;
-NS.prototype.metricType = null;
 
 NS.prototype.database = '';
 NS.prototype.databaseHash = 0;
