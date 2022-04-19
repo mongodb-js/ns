@@ -16,7 +16,7 @@ function NS(ns) {
     this.collection = ns.slice(this.dotIndex + 1);
   }
 
-  this.system = /^system\./.test(this.collection);
+  this.system = /^(?:system|enxcol_)\./.test(this.collection);
   this.oplog = /local\.oplog\.(\$main|rs)/.test(ns);
 
   this.command =

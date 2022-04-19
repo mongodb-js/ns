@@ -42,6 +42,9 @@ describe('ns', function() {
     it('should acccept `a.system.foo`', function() {
       assert(ns('a.system.foo').special);
     });
+    it('should acccept `a.enxcol_.foo`', function() {
+      assert(ns('a.enxcol_.foo').special);
+    });
     it('should not accept `a.foo`', function() {
       assert.equal(ns('a.foo').special, false);
     });
