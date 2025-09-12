@@ -56,33 +56,28 @@ describe('ns', function() {
     });
   });
 
-  describe('should identify internal namespaces', function() {
-    it('should treat `__mdb_internal_anything` as internal', function() {
-      assert(ns('__mdb_internal_anything').internal);
-    });
-    it('should treat `__mdb_internal_anything.anyCollection` as internal', function() {
-      assert(ns('__mdb_internal_anything.anyCollection').internal);
-    });
-    it('should not treat `__mdb_internal_` as internal', function() {
-      assert.equal(ns('__mdb_internal_').internal, false);
-    });
-    it('should not treat `__mdb_internal_.test` as internal', function() {
-      assert.equal(ns('__mdb_internal_.test').internal, false);
-    });
-  });
-
   describe('should identify system namespaces', function() {
-    it('should acccept `anything.system.profile as system`', function() {
-      assert(ns('anything.system.profile').system);
+    it('should acccept `anyDB.enxcol_.` as system`', function() {
+      assert(ns('anyDB.enxcol_.').system);
     });
-    it('should NOT acccept `system.profile.anything as system`', function() {
-      assert.equal((ns('system.profile.anything').system), false);
+    it('should acccept `anyDB.system.` as system`', function() {
+      assert(ns('anyDB.system.').system);
     });
-    it('should NOT acccept `anything.a_system.profile as system`', function() {
-      assert.equal((ns('anything.a_system.profile').system), false);
+    it('should acccept `anyDB.system.anyCollSuffix` as system`', function() {
+      assert(ns('anyDB.system.anyCollSuffix').system);
     });
-    it('should NOT acccept `anything.system.profile_a as system`', function() {
-      assert.equal((ns('anything.a_system.profile').system), false);
+    it('should NOT acccept `anyDB.anyCollPrefix.system` as system`', function() {
+      assert.equal((ns('anyDB.anyCollPrefix.system').system), false);
+    });
+    it('should NOT acccept `anyDB.system` as system`', function() {
+      assert.equal((ns('anyDB.system').system), false);
+    });
+    // special exception for system.profile COMPASS-9377
+    it('should NOT acccept `anyDB.system.profile as system`', function() {
+      assert.equal((ns('anyDB.system.profile').system), false);
+    });
+    it('should acccept `anyDB.system.profile_anything as system`', function() {
+      assert(ns('anyDB.system.profile_anything').system);
     });
   });
 

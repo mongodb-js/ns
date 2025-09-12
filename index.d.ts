@@ -14,8 +14,6 @@ class NS {
   specialish: boolean;
   normal: boolean;
   isNormal(): boolean;
-  internal: boolean;
-  isInternal(): boolean;
   validDatabaseName: boolean;
   validCollectionName: boolean;
   databaseHash: number;

@@ -1,4 +1,4 @@
-var types = ['Command', 'Special', 'System', 'Oplog', 'Normal', 'Conf', 'Internal'];
+var types = ['Command', 'Special', 'System', 'Oplog', 'Normal', 'Conf'];
 
 // eslint-disable-next-line complexity
 function NS(ns) {
@@ -16,9 +16,9 @@ function NS(ns) {
     this.collection = ns.slice(this.dotIndex + 1);
   }
 
-  this.system = /^(?:system|enxcol_|system\.profile$)\./.test(this.collection);
+  this.system = /^(?:system(?!\.profile$).*|enxcol_)\./.test(this.collection) || /^__mdb_internal_\w/.test(this.database);
+
   this.oplog = /local\.oplog\.(\$main|rs)/.test(ns);
-  this.internal = /^__mdb_internal_\w/.test(this.database);
 
   this.command =
     this.collection === '$cmd' || this.collection.indexOf('$cmd.sys') === 0;
@@ -64,7 +64,6 @@ NS.prototype.system = false;
 NS.prototype.oplog = false;
 NS.prototype.normal = false;
 NS.prototype.specialish = false;
-NS.prototype.internal = false;
 
 types.forEach(function(type) {
   NS.prototype['is' + type] = function() {
