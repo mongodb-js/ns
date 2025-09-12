@@ -54,6 +54,18 @@ describe('ns', function() {
     it('should not accept `a.foo.system.bar`', function() {
       assert.equal(ns('a.foo.system.bar').special, false);
     });
+    it('should not accept `prefix__mdb_internal_suffix`', function() {
+      assert.equal(ns('prefix__mdb_internal_suffix').special, false);
+    });
+    it('should not accept `anyDB.prefix__mdb_internal_suffix`', function() {
+      assert.equal(ns('anyDB.prefix__mdb_internal_itsACollectionNow').special, false);
+    });
+    it('should not accept `prefix__mdb_internal_suffix`', function() {
+      assert.equal(ns('prefix__mdb_internal_').special, false);
+    });
+    it('should acccept `__mdb_internal_suffix`', function() {
+      assert(ns('__mdb_internal_suffix').special);
+    });
   });
 
   describe('should identify system namespaces', function() {
@@ -72,7 +84,7 @@ describe('ns', function() {
     it('should NOT acccept `anyDB.system` as system`', function() {
       assert.equal((ns('anyDB.system').system), false);
     });
-    // special exception for system.profile COMPASS-9377
+    // exception for system.profile COMPASS-9377
     it('should NOT acccept `anyDB.system.profile as system`', function() {
       assert.equal((ns('anyDB.system.profile').system), false);
     });
