@@ -106,8 +106,8 @@ describe('ns', function() {
     it('should not accept `foo\\bar` as a valid database name', function() {
       assert.equal(ns('foo\\bar').validDatabaseName, false);
     });
-    it('should not accept `foo\"bar` as a valid database name', function() {
-      assert.equal(ns('foo\"bar').validDatabaseName, false);
+    it('should not accept `foo"bar` as a valid database name', function() {
+      assert.equal(ns('foo"bar').validDatabaseName, false);
     });
     it.skip('should not accept `foo*bar` as a valid database name', function() {
       assert.equal(ns('foo*bar').validDatabaseName, false);
