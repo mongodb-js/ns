@@ -1,3 +1,6 @@
+> [!WARNING]
+> This repository is archived. Package was moved to [mongodb-js/devtools-shared](https://github.com/mongodb-js/devtools-shared/tree/main/packages/mongodb-ns)
+
 # mongodb-ns
 
 Handle dem namespaces like the kernel do.
