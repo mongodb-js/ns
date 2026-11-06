@@ -39,7 +39,7 @@ function NS(ns) {
     this.database.length <= NS.MAX_DATABASE_NAME_LENGTH;
   this.validCollectionName =
     this.collection.length > 0 &&
-    (this.oplog || /^[^\0\$]*$/.test(this.collection));
+    (this.oplog || /^[^\0$]*$/.test(this.collection));
 
   this.databaseHash = 7;
   this.ns.split('').every(
